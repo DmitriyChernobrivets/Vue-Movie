@@ -27,7 +27,13 @@
         <span class="date">{{movie.release_date | sliceYear}}</span>
         <v-spacer></v-spacer>
         <div class="actions">
-          <v-btn fab flat small class="'red--text'" @click="handleWatchlist(movie.id)">
+          <v-btn
+            fab
+            flat
+            small
+            :class="!isCardinWatchlist(movie.id) ? 'black--text' : 'red--text'"
+            @click="handleWatchlist(movie)"
+          >
             <v-icon>favorite</v-icon>
           </v-btn>
 
@@ -50,19 +56,12 @@ import { mapGetters, mapActions, mapState } from "vuex";
 export default {
   props: ["movie"],
   computed: {
-    ...mapState(["watchlist"])
+    ...mapGetters(["isCardinWatchlist"])
   },
   methods: {
     ...mapActions(["addToWatchlist"]),
-    handleWatchlist(id) {
-      const isInWatchlist = this.watchlist.find(item => item.id === id);
-      console.log(this.watchlist);
-      if (isInWatchlist) {
-        this.addToWatchlist(this.getWatchlist);
-      } else {
-        const sliced = this.watchlist.filter(item => item.id !== movie.id);
-        this.addToWatchlist(sliced);
-      }
+    handleWatchlist(movie) {
+      this.addToWatchlist(movie);
     }
   }
 };

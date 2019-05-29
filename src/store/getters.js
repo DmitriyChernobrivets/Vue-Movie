@@ -5,5 +5,6 @@ export default {
   getSearch: state => state.search,
   getError: state => state.error,
   getLoading: state => state.loading,
-  getWatchlist: state => state.watchlist
+  getWatchlist: state => state.watchlist,
+  isCardinWatchlist: state => id => state.watchlist.find(item => item.id === id)
 };

@@ -69,10 +69,21 @@ export default {
     }
   },
   addToWatchlist({ commit }, payload) {
-    localStorage.setItem("watchlist", JSON.stringify(payload));
+    const parse = JSON.parse(localStorage.getItem("watchlist"));
 
-    commit("handleWatchlist", payload);
+    const isInWatchlist = parse
+      ? parse.find(item => item.id === payload.id)
+      : null;
+
+    let updatedItem;
+    if (isInWatchlist) {
+      updatedItem = parse.filter(item => item.id !== payload.id);
+      localStorage.setItem("watchlist", JSON.stringify(updatedItem));
+    } else {
+      updatedItem = parse ? [...parse, payload] : [payload];
+      localStorage.setItem("watchlist", JSON.stringify(updatedItem));
+    }
+
+    commit("handleWatchlist", updatedItem);
   }
-
-  //   addCard: ({ commit }, payload) => {}
 };

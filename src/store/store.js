@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     movies: [],
-    watchlist: [],
+    watchlist: JSON.parse(localStorage.getItem("watchlist")) || [],
     page: 1,
     loading: false,
     search: null,
