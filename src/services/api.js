@@ -8,9 +8,21 @@ const site = axios.create({
 const api = {
   fetchNowPlayingMovies: page =>
     site.get(
-      `/movie/now_playing?api_key=${
+      `movie/now_playing?api_key=${
         settings.API_KEY
       }&language=en-US&page=${page}`
+    ),
+  fetchbyGenre: payload =>
+    site.get(
+      `discover/movie?api_key=${settings.API_KEY}&language=en-US&page=${
+        payload.page
+      }&with_genres=${payload.genre}`
+    ),
+  fetchSearch: payload =>
+    site.get(
+      `search/movie?api_key=${settings.API_KEY}&language=en-US&query=${
+        payload.query
+      }&page=${payload.page}`
     )
 };
 

@@ -10,6 +10,10 @@ export default new Vuex.Store({
   state: {
     movies: [],
     watchlist: [],
+    page: 1,
+    loading: false,
+    search: null,
+    genre: null,
     error: null
   },
   mutations,

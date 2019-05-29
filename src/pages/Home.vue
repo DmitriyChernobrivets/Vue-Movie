@@ -11,43 +11,54 @@
           label="Search"
           clearable
           prepend-inner-icon="search"
+          @click:prepend-inner="handleSearch"
         ></v-text-field>
       </v-flex>
     </v-layout>
 
-    <MovieList></MovieList>
+    <MovieList v-if="!getError"></MovieList>
+
+    <ErrorHandler v-else :message="getError"></ErrorHandler>
+
+    <Spinner class="spinner" fadeIn name="wave" color="red" v-if="getLoading"/>
   </v-container>
 </template>
 
 <script>
 import MovieList from "../components/MovieList";
-import genresList from "../constants/genres";
+import ErrorHandler from "../components/ErrorHandler";
+import { genresReduce } from "../helpers/Helpfunctions";
 import queryString from "query-string";
-
-const genresReduce = () =>
-  genresList.reduce((acc, genre) => acc.concat(genre.name), []);
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
-    MovieList: MovieList
+    MovieList: MovieList,
+    ErrorHandler: ErrorHandler
   },
   data: () => ({
     searchValue: "",
-    genres: genresReduce(),
-    page: 1
+    genres: genresReduce()
   }),
+  computed: mapGetters(["getError", "getLoading"]),
   methods: {
+    ...mapActions(["fetchByGenre", "fetchSearch"]),
     onSelectChange(value) {
-      const parsed = queryString.parse(location.search, {
-        arrayFormat: "comma"
-      });
-      console.log("parsed", parsed);
-      const string = queryString.stringify(parsed, { arrayFormat: "comma" });
-      console.log("string", string);
+      this.fetchByGenre(value);
+    },
+    handleSearch() {
+      if (this.searchValue.trim() === "") {
+        return;
+      }
+      this.fetchSearch(this.searchValue);
+      this.searchValue = "";
     }
   }
 };
 </script>
 
 <style lang="scss">
+.spinner {
+  margin: 0 auto;
+}
 </style>
