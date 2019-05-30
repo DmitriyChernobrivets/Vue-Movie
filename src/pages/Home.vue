@@ -32,6 +32,7 @@ import queryString from "query-string";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
+  name: "HomePage",
   components: {
     MovieList: MovieList,
     ErrorHandler: ErrorHandler

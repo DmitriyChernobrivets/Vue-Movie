@@ -83,7 +83,21 @@ export default {
       updatedItem = parse ? [...parse, payload] : [payload];
       localStorage.setItem("watchlist", JSON.stringify(updatedItem));
     }
-
     commit("handleWatchlist", updatedItem);
+  },
+  deleteFromWatchlist({ commit }, id) {
+    const parse = JSON.parse(localStorage.getItem("watchlist"));
+
+    const updatedItem = parse.filter(item => item.id !== id);
+    localStorage.setItem("watchlist", JSON.stringify(updatedItem));
+    commit("handleWatchlist", updatedItem);
+  },
+  setUser({ commit }, user) {
+    const newUser = user && {
+      userName: user.displayName,
+      email: user.email,
+      photo: user.photoURL
+    };
+    commit("setuser", newUser);
   }
 };

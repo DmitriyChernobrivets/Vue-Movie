@@ -1,9 +1,11 @@
 <template>
-  <div>films Info page</div>
+  <div></div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "MovieInfo"
+};
 </script>
 
 <style lang="scss" scoped>

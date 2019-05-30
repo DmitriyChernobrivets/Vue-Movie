@@ -12,6 +12,7 @@ import { mapGetters, mapActions } from "vuex";
 import MovieCard from "./MovieCard";
 
 export default {
+  name: "MovieList",
   components: {
     MovieCard: MovieCard
   },

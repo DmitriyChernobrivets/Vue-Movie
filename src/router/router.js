@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "../pages/Home";
-import FilmInfo from "../pages/FilmInfo";
+import MovieInfo from "../pages/MovieInfo";
 import Watchlist from "../pages/Watchlist";
+import Auth from "../pages/Auth";
 
 Vue.use(Router);
 
@@ -17,14 +18,20 @@ export default new Router({
     },
     {
       path: "/info/:id",
-      name: "FilmInfo",
-      component: FilmInfo
+      name: "MovieInfo",
+      component: MovieInfo
     },
 
     {
       path: "/watchlist",
       name: "Watchlist",
       component: Watchlist
+    },
+
+    {
+      path: "/signin",
+      name: "Auth",
+      component: Auth
     }
   ]
 });

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <nav-component></nav-component>
-    <router-view/>
+    <transition name="route-transition">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -22,6 +24,16 @@ body {
 .v-menu > div {
   top: 40px !important;
   left: 0 !important;
+}
+
+.route-transition-enter,
+.route-transition-leave-active {
+  transform: scale(0);
+}
+
+.route-transition-enter-active,
+.route-transition-leave-active {
+  transition: transform 0.5s ease-in-out;
 }
 * {
   box-sizing: border-box;

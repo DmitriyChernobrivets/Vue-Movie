@@ -24,5 +24,8 @@ export default {
   },
   handleWatchlist(state, payload) {
     state.watchlist = payload;
+  },
+  setuser(state, payload) {
+    state.user = payload;
   }
 };
