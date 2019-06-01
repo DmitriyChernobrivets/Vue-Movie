@@ -59,6 +59,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .spinner {
   margin: 0 auto;
 }
