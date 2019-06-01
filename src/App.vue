@@ -4,15 +4,19 @@
     <transition name="route-transition">
       <router-view/>
     </transition>
+    <Trailer-Dialog/>
   </div>
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
+import TrailerDialog from "./components/TrailerDialog";
 
+// @close="closeModal" v-if="openModal" :id="movie.id"
 export default {
   components: {
-    "nav-component": Navigation
+    "nav-component": Navigation,
+    "Trailer-Dialog": TrailerDialog
   }
 };
 </script>

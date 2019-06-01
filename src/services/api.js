@@ -23,7 +23,12 @@ const api = {
       `search/movie?api_key=${settings.API_KEY}&language=en-US&query=${
         payload.query
       }&page=${payload.page}`
-    )
+    ),
+
+  fetchTrailer: id =>
+    site.get(`movie/${id}/videos?api_key=${settings.API_KEY}&language=en-US`),
+  fetchMovieById: id =>
+    site.get(`movie/${id}?api_key=${settings.API_KEY}&language=en-US`)
 };
 
 export default api;

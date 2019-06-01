@@ -15,9 +15,11 @@ import { changeGenre, sliceYear } from "./helpers/Helpfunctions";
 Vue.use(Vuetify);
 Vue.config.productionTip = false;
 Vue.use(infiniteScroll);
-Vue.component("Spinner", Spinner);
+
 Vue.filter("changeGenre", changeGenre);
 Vue.filter("sliceYear", sliceYear);
+
+Vue.component("Spinner", Spinner);
 
 new Vue({
   router,

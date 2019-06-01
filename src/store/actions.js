@@ -68,6 +68,7 @@ export default {
       commit("setError", error.message);
     }
   },
+
   addToWatchlist({ commit }, payload) {
     const parse = JSON.parse(localStorage.getItem("watchlist"));
 

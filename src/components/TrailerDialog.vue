@@ -1,6 +1,6 @@
-<template>
+<template >
   <transition name="modal-fade">
-    <div width="500" class="modal-overlay" @click="close">
+    <div width="500" class="modal-overlay" @click="closeModal" v-if="isOpen && key">
       <v-container>
         <v-layout row justify-center>
           <v-flex xs8 sm6>
@@ -14,15 +14,19 @@
                 fab
                 dark
                 small
-                @click="close"
+                @click="closeModal"
               >X</v-btn>
 
               <div class="trailer-container">
                 <iframe
+                  v-if="!error"
                   class="trailer-frame"
-                  src="https://www.youtube.com/embed/Lq-KoJ8GsQI?autoplay=1"
+                  :src="'https://www.youtube.com/embed/'+ key + '?autoplay=1'"
                   frameborder="0"
                 ></iframe>
+                <div v-else>
+                  <h1>Sorry, Error :(</h1>
+                </div>
               </div>
             </v-card>
           </v-flex>
@@ -33,13 +37,37 @@
 </template>
 
 <script>
+import api from "../services/api";
 export default {
-  props: ["tralierUrl"],
+  data() {
+    return {
+      isOpen: false,
+      key: null,
+      error: null
+    };
+  },
 
   methods: {
-    close() {
-      this.$emit("close");
+    async fetchTrailer(id) {
+      try {
+        const response = await api.fetchTrailer(id);
+        this.key = response.data.results[0].key;
+      } catch (error) {
+        this.error = error.message;
+      }
+    },
+    openModal(id) {
+      this.fetchTrailer(id);
+      this.isOpen = true;
+    },
+    closeModal() {
+      this.isOpen = false;
     }
+  },
+
+  mounted() {
+    //this.$root.$on("close", () => this.closeModal());
+    this.$root.$on("open", id => this.openModal(id));
   }
 };
 </script>

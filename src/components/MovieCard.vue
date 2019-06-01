@@ -43,24 +43,20 @@
         </div>
       </div>
       <v-card-actions>
-        <v-btn flat color="red" @click.stop.prevent="showModal">Trailer</v-btn>
+        <v-btn flat color="red" @click="openDialog">Trailer</v-btn>
 
         <v-btn flat color="red">Info</v-btn>
       </v-card-actions>
     </v-card>
-    <TrailerDialog @close="closeModal" v-show="openModal"></TrailerDialog>
   </v-flex>
 </template>
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
-import TrailerDialog from "./TrailerDialog";
 
 export default {
   name: "MovieCard",
-  components: {
-    TrailerDialog
-  },
+  components: {},
   props: ["movie"],
 
   computed: {
@@ -76,12 +72,8 @@ export default {
     handleWatchlist(movie) {
       this.addToWatchlist(movie);
     },
-
-    showModal() {
-      this.openModal = true;
-    },
-    closeModal() {
-      this.openModal = false;
+    openDialog() {
+      this.$root.$emit("open", this.movie.id);
     }
   }
 };
