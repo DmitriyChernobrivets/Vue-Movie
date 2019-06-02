@@ -1,39 +1,11 @@
 <template >
-  <transition name="modal-fade">
-    <div width="500" class="modal-overlay" @click="closeModal" v-if="isOpen && key">
-      <v-container>
-        <v-layout row justify-center>
-          <v-flex xs8 sm6>
-            <v-card relative>
-              <v-btn
-                color="red"
-                class="trailer-close-btn"
-                absolute
-                right
-                top
-                fab
-                dark
-                small
-                @click="closeModal"
-              >X</v-btn>
-
-              <div class="trailer-container">
-                <iframe
-                  v-if="!error"
-                  class="trailer-frame"
-                  :src="'https://www.youtube.com/embed/'+ key + '?autoplay=1'"
-                  frameborder="0"
-                ></iframe>
-                <div v-else>
-                  <h1>Sorry, Error :(</h1>
-                </div>
-              </div>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </div>
-  </transition>
+  <Modal name="trailer-dialog" @before-open="beforeOpen" :width="700" :height="500">
+    <iframe
+      class="trailer-frame"
+      :src="'https://www.youtube.com/embed/'+ key + '?autoplay=1'"
+      frameborder="0"
+    ></iframe>
+  </Modal>
 </template>
 
 <script>
@@ -41,14 +13,13 @@ import api from "../services/api";
 export default {
   data() {
     return {
-      isOpen: false,
       key: null,
       error: null
     };
   },
-
   methods: {
     async fetchTrailer(id) {
+      console.log(id);
       try {
         const response = await api.fetchTrailer(id);
         this.key = response.data.results[0].key;
@@ -56,18 +27,9 @@ export default {
         this.error = error.message;
       }
     },
-    openModal(id) {
-      this.fetchTrailer(id);
-      this.isOpen = true;
-    },
-    closeModal() {
-      this.isOpen = false;
+    beforeOpen(event) {
+      this.fetchTrailer(event.params.id);
     }
-  },
-
-  mounted() {
-    //this.$root.$on("close", () => this.closeModal());
-    this.$root.$on("open", id => this.openModal(id));
   }
 };
 </script>
@@ -89,16 +51,6 @@ export default {
 .trailer-close-btn {
   top: -50px;
   right: -30px;
-}
-
-.modal-fade-enter,
-.modal-fade-leave-active {
-  opacity: 0;
-}
-
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity 0.3s ease-in-out;
 }
 
 .trailer-frame {

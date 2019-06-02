@@ -43,20 +43,19 @@
         </div>
       </div>
       <v-card-actions>
-        <v-btn flat color="red" @click="openDialog">Trailer</v-btn>
+        <v-btn flat color="red" @click="showModalTrailer">Trailer</v-btn>
 
-        <v-btn flat color="red">Info</v-btn>
+        <v-btn flat color="red" @click="showModalInfo">Info</v-btn>
       </v-card-actions>
     </v-card>
   </v-flex>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "MovieCard",
-  components: {},
   props: ["movie"],
 
   computed: {
@@ -72,14 +71,18 @@ export default {
     handleWatchlist(movie) {
       this.addToWatchlist(movie);
     },
-    openDialog() {
-      this.$root.$emit("open", this.movie.id);
+
+    showModalTrailer() {
+      this.$modal.show("trailer-dialog", { id: this.movie.id });
+    },
+    showModalInfo() {
+      this.$modal.show("info-dialog", { id: this.movie.id });
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .movie__card {
   margin: 0 auto 20px 0;
   width: 95%;

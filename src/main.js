@@ -11,6 +11,11 @@ import Spinner from "vue-spinkit";
 import * as firebase from "firebase";
 import config from "./firebase/config";
 import { changeGenre, sliceYear } from "./helpers/Helpfunctions";
+import VModal from "vue-js-modal";
+
+Vue.use(VModal, {
+  componentName: "Modal"
+});
 
 Vue.use(Vuetify);
 Vue.config.productionTip = false;

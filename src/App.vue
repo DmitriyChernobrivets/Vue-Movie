@@ -4,19 +4,22 @@
     <transition name="route-transition">
       <router-view/>
     </transition>
-    <Trailer-Dialog/>
+
+    <TralierDialog/>
+    <InforDialog/>
   </div>
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
-import TrailerDialog from "./components/TrailerDialog";
+import TralierDialog from "./components/TrailerDialog";
+import InforDialog from "./components/InforDialog";
 
-// @close="closeModal" v-if="openModal" :id="movie.id"
 export default {
   components: {
     "nav-component": Navigation,
-    "Trailer-Dialog": TrailerDialog
+    TralierDialog: TralierDialog,
+    InforDialog: InforDialog
   }
 };
 </script>
@@ -25,9 +28,22 @@ export default {
 body {
   background-color: rgb(226, 226, 226);
 }
+iframe {
+  width: 100%;
+  height: 100%;
+}
 .v-menu > div {
   top: 40px !important;
   left: 0 !important;
+}
+.modal-fade-enter,
+.modal-fade-leave-active {
+  opacity: 0;
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
 }
 
 .route-transition-enter,
