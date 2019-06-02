@@ -14,7 +14,7 @@ import { changeGenre, sliceYear } from "./helpers/Helpfunctions";
 import VModal from "vue-js-modal";
 
 Vue.use(VModal, {
-  componentName: "Modal"
+  dynamic: true
 });
 
 Vue.use(Vuetify);

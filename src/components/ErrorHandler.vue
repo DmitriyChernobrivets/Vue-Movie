@@ -10,7 +10,9 @@
 <script>
 export default {
   name: "ErrorHandler",
-  props: ["message"]
+  props: {
+    message: String
+  }
 };
 </script>
 

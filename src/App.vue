@@ -4,22 +4,16 @@
     <transition name="route-transition">
       <router-view/>
     </transition>
-
-    <TralierDialog/>
-    <InforDialog/>
+    <modals-container/>
   </div>
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
-import TralierDialog from "./components/TrailerDialog";
-import InforDialog from "./components/InforDialog";
 
 export default {
   components: {
-    "nav-component": Navigation,
-    TralierDialog: TralierDialog,
-    InforDialog: InforDialog
+    "nav-component": Navigation
   }
 };
 </script>

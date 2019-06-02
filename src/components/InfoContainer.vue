@@ -1,7 +1,5 @@
 <template>
-  <Modal name="info-dialog" @before-open="beforeOpen" :width="700" :height="500">
-    <div v-if="movie">{{movie.id}}</div>
-  </Modal>
+  <div v-if="movie">{{movie.id}}</div>
 </template>
 
 <script>
@@ -9,11 +7,17 @@ import api from "../services/api";
 
 export default {
   name: "InfoDialog",
+  props: {
+    id: Number
+  },
   data() {
     return {
       movie: null,
       error: null
     };
+  },
+  mounted() {
+    this.fetchMovieById(this.id);
   },
   methods: {
     async fetchMovieById(id) {
@@ -23,10 +27,6 @@ export default {
       } catch (error) {
         this.error = error.message;
       }
-    },
-    beforeOpen(event) {
-      console.log(event.params.id);
-      this.fetchMovieById(event.params.id);
     }
   }
 };

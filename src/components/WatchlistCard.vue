@@ -16,7 +16,9 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "WatchlistCard",
-  props: ["item"],
+  props: {
+    item: Object
+  },
 
   methods: {
     ...mapActions(["deleteFromWatchlist"]),

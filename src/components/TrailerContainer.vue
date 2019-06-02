@@ -1,34 +1,34 @@
 <template >
-  <Modal name="trailer-dialog" @before-open="beforeOpen" :width="700" :height="500">
-    <iframe
-      class="trailer-frame"
-      :src="'https://www.youtube.com/embed/'+ key + '?autoplay=1'"
-      frameborder="0"
-    ></iframe>
-  </Modal>
+  <iframe
+    class="trailer-frame"
+    :src="'https://www.youtube.com/embed/'+ key + '?autoplay=1'"
+    frameborder="0"
+  ></iframe>
 </template>
 
 <script>
 import api from "../services/api";
 export default {
+  props: {
+    id: Number
+  },
   data() {
     return {
       key: null,
       error: null
     };
   },
+  mounted() {
+    this.fetchTrailer(this.id);
+  },
   methods: {
     async fetchTrailer(id) {
-      console.log(id);
       try {
         const response = await api.fetchTrailer(id);
         this.key = response.data.results[0].key;
       } catch (error) {
         this.error = error.message;
       }
-    },
-    beforeOpen(event) {
-      this.fetchTrailer(event.params.id);
     }
   }
 };

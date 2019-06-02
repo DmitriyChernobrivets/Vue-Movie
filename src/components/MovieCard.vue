@@ -43,9 +43,12 @@
         </div>
       </div>
       <v-card-actions>
-        <v-btn flat color="red" @click="showModalTrailer">Trailer</v-btn>
+        <!-- <v-btn flat color="red" @click="showModalTrailer">Trailer</v-btn>
 
-        <v-btn flat color="red" @click="showModalInfo">Info</v-btn>
+        <v-btn flat color="red" @click="showModalInfo">Info</v-btn>-->
+        <v-btn flat color="red" @click="showTrailerModal">Trailer</v-btn>
+
+        <v-btn flat color="red" @click="showInfoModal">Info</v-btn>
       </v-card-actions>
     </v-card>
   </v-flex>
@@ -53,30 +56,38 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import TrailerContainer from "./TrailerContainer";
+import InfoContainer from "./InfoContainer";
 
 export default {
   name: "MovieCard",
-  props: ["movie"],
+  props: {
+    movie: Object
+  },
 
   computed: {
     ...mapGetters(["isCardinWatchlist"])
   },
-  data() {
-    return {
-      openModal: false
-    };
-  },
+
   methods: {
     ...mapActions(["addToWatchlist"]),
     handleWatchlist(movie) {
       this.addToWatchlist(movie);
     },
-
-    showModalTrailer() {
-      this.$modal.show("trailer-dialog", { id: this.movie.id });
+    showTrailerModal() {
+      this.$modal.show(
+        TrailerContainer,
+        { id: this.movie.id },
+        { height: 450, width: 700 }
+      );
     },
-    showModalInfo() {
-      this.$modal.show("info-dialog", { id: this.movie.id });
+
+    showInfoModal() {
+      this.$modal.show(
+        InfoContainer,
+        { id: this.movie.id },
+        { height: 650, width: 1000 }
+      );
     }
   }
 };
