@@ -12,9 +12,7 @@ export default {
   setError(state, payload) {
     state.error = payload;
   },
-  setGenre(state, payload) {
-    state.genre = payload;
-  },
+
   setSearch(state, payload) {
     state.search = payload;
     state.error = null;

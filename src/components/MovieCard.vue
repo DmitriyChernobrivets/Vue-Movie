@@ -43,9 +43,6 @@
         </div>
       </div>
       <v-card-actions>
-        <!-- <v-btn flat color="red" @click="showModalTrailer">Trailer</v-btn>
-
-        <v-btn flat color="red" @click="showModalInfo">Info</v-btn>-->
         <v-btn flat color="red" @click="showTrailerModal">Trailer</v-btn>
 
         <v-btn flat color="red" @click="showInfoModal">Info</v-btn>
@@ -75,25 +72,32 @@ export default {
       this.addToWatchlist(movie);
     },
     showTrailerModal() {
-      this.$modal.show(
-        TrailerContainer,
-        { id: this.movie.id },
-        { height: 450, width: 700 }
-      );
+      this.$modal.show(TrailerContainer, { id: this.movie.id });
     },
 
     showInfoModal() {
-      this.$modal.show(
-        InfoContainer,
-        { id: this.movie.id },
-        { height: 650, width: 1000 }
-      );
+      this.$modal.show(InfoContainer, { id: this.movie.id });
     }
   }
 };
 </script>
 
 <style lang="scss">
+.v--modal {
+  width: 1000px !important;
+  min-height: 550px !important;
+  bottom: 50% !important;
+  left: 50% !important;
+
+  transform: translate(-50%, -25%) !important;
+  @media screen and (max-width: 996px) {
+    width: 600px !important;
+    min-height: 500px !important;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100% !important;
+  }
+}
 .movie__card {
   margin: 0 auto 20px 0;
   width: 95%;

@@ -10,10 +10,23 @@
 
 <script>
 import Navigation from "./components/Navigation.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     "nav-component": Navigation
+  },
+  computed: {
+    ...mapGetters(["getuser"])
+  },
+  watch: {
+    getuser(old, newU) {
+      if (old) {
+        if (this.$router.history.current.name === "Auth") {
+          this.$router.push("/");
+        }
+      }
+    }
   }
 };
 </script>
@@ -21,10 +34,16 @@ export default {
 <style lang="scss">
 body {
   background-color: rgb(226, 226, 226);
+  min-width: 450px;
+  padding-bottom: 40px;
 }
 iframe {
   width: 100%;
   height: 100%;
+}
+ul {
+  list-style: none;
+  padding: 0;
 }
 .v-menu > div {
   top: 40px !important;

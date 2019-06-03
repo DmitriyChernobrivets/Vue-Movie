@@ -34,10 +34,10 @@ new Vue({
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setUser(user);
-        this.$router.push("/");
       }
     });
   },
+
   methods: {
     ...mapActions(["setUser"])
   },

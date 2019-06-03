@@ -2,21 +2,22 @@ import api from "../services/api";
 import { replaceGenreNametoId } from "../helpers/Helpfunctions";
 
 export default {
-  fetchMovies: async ({ commit, getters }) => {
+  fetchMovies: async ({ commit, getters }, payload) => {
     commit("setLoading", true);
+
     try {
       const currentPage = getters.getPage;
       let response;
-      const genre = getters.getGenre;
+      // const genre = getters.getGenre;
       const search = getters.getSearch;
 
-      if (!genre && !search) {
+      if (!payload && !search) {
         response = await api.fetchNowPlayingMovies(currentPage);
       } else if (search) {
         const fetchObj = { page: currentPage, query: search };
         response = await api.fetchSearch(fetchObj);
       } else {
-        const genreId = replaceGenreNametoId(genre);
+        const genreId = replaceGenreNametoId(payload);
         const fetchObj = { page: currentPage, genre: genreId };
         response = await api.fetchbyGenre(fetchObj);
       }
@@ -36,7 +37,7 @@ export default {
       const fetchObj = { page: 1, genre: genreId };
       const response = await api.fetchbyGenre(fetchObj);
       const movies = response.data.results;
-      commit("setGenre", payload);
+
       commit("resetMovies");
       commit("setLoading", false);
       commit("setMovies", movies);

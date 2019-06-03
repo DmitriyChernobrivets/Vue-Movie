@@ -28,7 +28,9 @@ const api = {
   fetchTrailer: id =>
     site.get(`movie/${id}/videos?api_key=${settings.API_KEY}&language=en-US`),
   fetchMovieById: id =>
-    site.get(`movie/${id}?api_key=${settings.API_KEY}&language=en-US`)
+    site.get(`movie/${id}?api_key=${settings.API_KEY}&language=en-US`),
+  fetchMovieActors: id =>
+    site.get(`movie/${id}/credits?api_key=${settings.API_KEY}`)
 };
 
 export default api;

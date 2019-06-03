@@ -1,14 +1,16 @@
 <template>
   <div>
     <v-layout row justify-space-between class="header">
-      <div class="logo"></div>
+      <div class="logo">
+        <span>MOVIES</span>
+      </div>
       <v-spacer></v-spacer>
 
-      <v-btn flat to="/">Home</v-btn>
-      <v-btn flat to="/watchlist">Watchlist</v-btn>
-      <v-btn flat v-if="!getuser" to="/signin">SignIn</v-btn>
+      <v-btn flat to="/" color="#fff">Home</v-btn>
+      <v-btn flat to="/watchlist" color="#fff">Watchlist</v-btn>
+      <v-btn flat v-if="!getuser" to="/signin" color="#fff">SignIn</v-btn>
       <div v-else class="auth-panel">
-        <v-btn flat @click="logOut">Logout</v-btn>
+        <v-btn flat @click="logOut" color="#fff">Logout</v-btn>
         <div class="user-photo">
           <img :src="getuser.photo" alt="getuser.displayName">
         </div>
@@ -43,6 +45,8 @@ export default {
 }
 .header {
   padding: 0 20px;
+  background-color: #1565c0;
+  color: #fff;
 }
 .user-photo {
   border-radius: 100%;
@@ -68,6 +72,9 @@ export default {
 .logo {
   height: 50px;
   width: 150px;
-  border: 1px solid black;
+  padding-left: 30px;
+  font-family: "Pacifico", cursive;
+  font-size: 26px;
+  text-align: center;
 }
 </style>

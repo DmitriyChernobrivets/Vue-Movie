@@ -14,7 +14,7 @@ export default new Vuex.Store({
     page: 1,
     loading: false,
     search: null,
-    genre: null,
+
     error: null
   },
   mutations,
